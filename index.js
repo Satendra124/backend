@@ -140,6 +140,10 @@ app.post("/api/room/:room_id/message", async (req, res) => {
             room.prompts.push(prompt);
             const rooms_obj = room.toObject();
             const state = await get_new_state_update_prompt(rooms_obj.prompts,room.prompts);
+            if(!state) {
+                res.status(400).json({ message: "Error connecting to AI" });
+                return;
+            }
             if(!state.valid){
                 // next round
                 room.current_round.challenger = replier;

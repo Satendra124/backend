@@ -38,11 +38,8 @@ const get_new_state_update_prompt = async (prompts, propts_sv, tries = 0) => {
         propts_sv.push(AI_prompt);
         return resData;
     } catch (error) {
-        if (tries >= 3) {
-            console.log(error);
-            return null;
-        }
-        return await get_new_state_update_prompt(prompts, tries + 1);
+        console.error(error);
+        return null;
     }
     
 }
