@@ -39,10 +39,12 @@ const get_new_state_update_prompt = async (prompts, propts_sv, tries = 0) => {
         return resData;
     } catch (error) {
         console.error(error);
-        return {
+        const pmp =  {
             "role" : "assistent",
             "content" : `NETWORK ERROR: ${error.message}`
         };
+        propts_sv.push(pmp);
+        return pmp;
     }
     
 }
