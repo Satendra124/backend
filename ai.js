@@ -16,10 +16,10 @@ const get_new_state_update_prompt = async (prompts, propts_sv, tries = 0) => {
     prompts.forEach((prompt) => {
         delete prompt._id;
     });
-
+    const api_key = process.env.OPENAI_API_KEY;
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer ' + api_key,
     };
     const data = {
         "model": "gpt-3.5-turbo-16k",
