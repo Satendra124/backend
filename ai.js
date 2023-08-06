@@ -6,7 +6,7 @@ const make_intial_prompt = (players, attributes) => {
         "content": `Act as a game api.\n\ntwo players ${players[0]} and ${players[1]} plays a game of life trying to kill each other.\n\nFirst ${players[0]} writes and ${players[1]} replies then ${players[1]} writes and ${players[0]} replies and so on.\n\nThere are attributes ${attributes.join(',')} each with initial being 10 and max 15 and min 0.\nAny attribute going to zero means that player dies.\n\nAll attributes are for you to decide that what happens on what action.\n\nMake sure everything follows a story failing of which send a response with valid as false other response should have valid as true. also give a reason when having valid as false.\n\nfor valid as true give current attribute values of both players\n\nYou can only reply as json object.if confused reply as valid as false and reason as the reason for confusion.\nvalid as true should also give an justification on why and how each attributes were changed and by how much think deep and create a story of 50 words.\n\nThere are only these json with which you can reply with\nfor valid:\n{\n\"valid\":true,\n\"reason\":\"Justification for changes\"\n\"data\":{\n    \"${players[0]}\": {\n    <attributes-data>\n  },\n  \"${players[1]}\": {\n    <attributes-data>\n  }\n  }\n}\nfor invalid:\n{\n\"valid\":false,\n\"reason\":\"Reason for invalid response\"\n}\n\n donot format the json\n`
     }
 };
-
+// some change
 const make_promt = (challenger, replyer, challenger_message, replyer_message) => {
     return { role: "user", content: `${challenger}:${challenger_message} \n ${replyer}:${replyer_message}` };
 }
