@@ -31,11 +31,20 @@ const get_new_state_update_prompt = async (prompts, propts_sv, tries = 0) => {
         "presence_penalty": 0
     };
     // try three times to get a non error response
-    const res = await axios.post('https://api.openai.com/v1/chat/completions', data, { headers: headers });
-    const AI_prompt = res.data.choices[0].message;
-    const  resData = JSON.parse(AI_prompt.content);
-    propts_sv.push(AI_prompt);
-    return resData;
+    try {
+        const res = await axios.post('https://api.openai.com/v1/chat/completions', data, { headers: headers });
+        const AI_prompt = res.data.choices[0].message;
+        const  resData = JSON.parse(AI_prompt.content);
+        propts_sv.push(AI_prompt);
+        return resData;
+    } catch (error) {
+        console.error(error);
+        return {
+            "role" : "assistent",
+            "content" : `NETWORK ERROR: ${error.message}`
+        };
+    }
+    
 }
 
 //export
